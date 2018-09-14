@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  isShotByPlayer: 1
+  _isShotByPlayer: 1
 --- !u!212 &212628145485739040
 SpriteRenderer:
   m_ObjectHideFlags: 1

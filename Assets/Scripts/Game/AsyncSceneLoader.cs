@@ -23,6 +23,12 @@ public class AsyncSceneLoader : MonoBehaviour {
         StartCoroutine(LoadAsynchronously(sceneIndex));
     }
 
+    /// <summary>
+    /// Loads a scene Asynchronously and sets a loadingscreen with a loadingbar
+    /// that goes to the right when the progress value increases
+    /// </summary>
+    /// <param name="sceneIndex">The Scene it needs to load</param>
+    /// <returns></returns>
     private IEnumerator LoadAsynchronously(int sceneIndex) {
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex);
         loadingScreen.SetActive(true);

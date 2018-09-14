@@ -5,22 +5,25 @@ using UnityEngine;
 public class HostileEntity : Entity {
 
     [SerializeField]
-    private float despawnHeight;
+    private float _despawnHeight;
 
     public bool isShootable;
     public bool canShoot;
 
     [SerializeField]
-    private int playerDamageOnCollision = 1;
+    private int _playerDamageOnCollision = 1;
 
+    /// <summary>
+    /// Checks if the enemy has reached their despawning point and despawns them.
+    /// </summary>
     public override void Update() {
         base.Update();
-        if (despawnHeight > 0) {
-            if (transform.position.y > despawnHeight) {
+        if (_despawnHeight > 0) {
+            if (transform.position.y > _despawnHeight) {
                 Death();
             }
         } else {
-            if (transform.position.y < despawnHeight) {
+            if (transform.position.y < _despawnHeight) {
                 Death();
             }
         }
@@ -36,9 +39,14 @@ public class HostileEntity : Entity {
         EnemySpawner.currentEnemies.Remove(gameObject);
     }
 
+    /// <summary>
+    /// If the enemy collides with the player it kills the enemy
+    /// and deals damage to the player.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.GetComponent<PlayerEntity>()) {
-            other.gameObject.GetComponent<PlayerEntity>().TakeDamage(playerDamageOnCollision);
+            other.gameObject.GetComponent<PlayerEntity>().TakeDamage(_playerDamageOnCollision);
             Death();
         }
     }

@@ -11,8 +11,12 @@ public class LevelLoader : MonoBehaviour {
         LoadLevel(Utility.currentLevel);
     }
 
+    /// <summary>
+    /// Loads a level from the resource folder depending on the level it needs to load.
+    /// </summary>
+    /// <param name="levelToLoad">The level it needs to load</param>
     public void LoadLevel(int levelToLoad) {
-        if (Utility.currentLevel != 0) {
+        if (levelToLoad != 0) {
             level = Resources.Load("Stages/Stage" + levelToLoad);
         }
 

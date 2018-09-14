@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
+    /// <summary>
+    /// The Wave class used to make waves of enemies.
+    /// </summary>
     [System.Serializable]
     public class Wave {
-        [System.Serializable]
-        public class Enemy {
-            public GameObject enemy;
-            public int lane;
-            public float spawnHeight;
-        }
-
         public Enemy[] enemies;
         public float timeBetweenNextWave;
+    }
+    /// <summary>
+    /// The enemy spawned by the Wave class.
+    /// </summary>
+    [System.Serializable]
+    public class Enemy {
+        public GameObject enemy;
+        public int lane;
+        public float spawnHeight;
     }
 
     public static int enemiesAlive = 0;
     public Wave[] waves;
-    [SerializeField]
-    private float _enemySpawnRate;
 
     [Tooltip("The initial countdown before the first wave spawns")]
     [SerializeField]
@@ -49,6 +52,15 @@ public class EnemySpawner : MonoBehaviour {
         currentEnemies = new List<GameObject>();
     }
 
+    /// <summary>
+    /// Checks if the last wave is over and if there aren't any enemies alive anymore
+    /// and then calls the method to complete the level.
+    /// 
+    /// Checks if the waveCountDown has reached 0 and if it isn't the last wave
+    /// and then spawns the next wave.
+    /// 
+    /// Checks if an enemy is supposed to shoot and then grabs a random enemy to shoot.
+    /// </summary>
     private void Update() {
         if (waveIndex == waves.Length && enemiesAlive == 0) {
             Utility.gameController.LevelCompleted();
@@ -74,19 +86,26 @@ public class EnemySpawner : MonoBehaviour {
         _waveCountDown = Mathf.Clamp(_waveCountDown, 0f, Mathf.Infinity);
     }
 
+    /// <summary>
+    /// Makes a local wave object and gives it the values of the wave tto spawn.
+    /// Then it loops through all the enemies of that wave and spawns them.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator SpawnWave() {
-        if (waveIndex < waves.Length) {
-            Wave wave = waves[waveIndex];
-            enemiesAlive += wave.enemies.Length;
+        Wave wave = waves[waveIndex];
+        enemiesAlive += wave.enemies.Length;
 
-            for (int i = 0; i < wave.enemies.Length; i++) {
-                Spawnenemy(wave.enemies[i].enemy);
-                yield return null;
-            }
-            waveIndex++;
+        for (int i = 0; i < wave.enemies.Length; i++) {
+            Spawnenemy(wave.enemies[i].enemy);
+            yield return null;
         }
+        waveIndex++;
     }
 
+    /// <summary>
+    /// Spawns the enemies and puts them in the positions defined by the wave.
+    /// </summary>
+    /// <param name="enemy">The enemy to spawn</param>
     private void Spawnenemy(GameObject enemy) {
         Wave wave = waves[waveIndex];
         if (wave.enemies[_currentEnemy].enemy.GetComponent<HostileEntity>().canShoot) {
@@ -102,7 +121,10 @@ public class EnemySpawner : MonoBehaviour {
             _currentEnemy = 0;
         }
     }
-
+    /// <summary>
+    /// Gets a random enemy that is able to shoot.
+    /// </summary>
+    /// <returns></returns>
     private GameObject GetRandomEnemy() {
         var tempList = currentEnemies;
         for (int i = tempList.Count - 1; i >= 0; i--) {

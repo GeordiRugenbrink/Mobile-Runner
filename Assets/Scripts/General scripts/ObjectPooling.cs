@@ -15,6 +15,13 @@ public class ObjectPooling : MonoBehaviour {
 
     private void Start() {
         _pooledObjects = new List<GameObject>();
+        CreateInitialPool();
+    }
+
+    /// <summary>
+    /// Creates the initial amount of objects that need to be created.
+    /// </summary>
+    private void CreateInitialPool() {
         for (int i = 0; i < _pooledAmount; i++) {
             GameObject obj = (GameObject)Instantiate(_objectToPool);
             obj.SetActive(false);
@@ -22,6 +29,11 @@ public class ObjectPooling : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Gets an inactive object out of the Objectpool.
+    /// If there aren't any and it is set to grow it creates a new Object and adds it to the pool.
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetPooledObject() {
         for (int i = 0; i < _pooledObjects.Count; i++) {
             if (!_pooledObjects[i].activeInHierarchy) {

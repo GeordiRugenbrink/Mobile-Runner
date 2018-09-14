@@ -7,7 +7,7 @@ public class ProjectileDamage : MonoBehaviour {
     [SerializeField]
     private int _damage = 1;
     [SerializeField]
-    private bool isShotByPlayer;
+    private bool _isShotByPlayer;
 
     /// <summary>
     /// When the projectile collides with either the player or the enemy 
@@ -16,13 +16,13 @@ public class ProjectileDamage : MonoBehaviour {
     /// <param name="other">The other collider that the projectile collides with</param>
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<HostileEntity>()) {
-            if (other.GetComponent<HostileEntity>().isShootable && isShotByPlayer) {
+            if (other.GetComponent<HostileEntity>().isShootable && _isShotByPlayer) {
                 other.GetComponent<HostileEntity>().TakeDamage(_damage);
                 gameObject.SetActive(false);
             } else if (!other.GetComponent<HostileEntity>().isShootable) {
                 gameObject.SetActive(false);
             }
-        } else if (other.GetComponent<PlayerEntity>() && !isShotByPlayer) {
+        } else if (other.GetComponent<PlayerEntity>() && !_isShotByPlayer) {
             other.GetComponent<PlayerEntity>().TakeDamage(_damage);
             gameObject.SetActive(false);
         }

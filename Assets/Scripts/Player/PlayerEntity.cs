@@ -6,18 +6,18 @@ public class PlayerEntity : Entity {
 
 
     [SerializeField]
-    private GameObject gameOverScreen;
+    private GameObject _gameOverScreen;
 
     [SerializeField]
-    private GameObject[] lifeIcons = new GameObject[3];
+    private GameObject[] _lifeIcons = new GameObject[3];
 
     public override void Start() {
         base.Start();
-        if (gameOverScreen != null) {
-            gameOverScreen.SetActive(false);
+        if (_gameOverScreen != null) {
+            _gameOverScreen.SetActive(false);
         }
-        for (int i = 0; i < lifeIcons.Length; i++) {
-            lifeIcons[i].SetActive(true);
+        for (int i = 0; i < _lifeIcons.Length; i++) {
+            _lifeIcons[i].SetActive(true);
         }
     }
 
@@ -25,11 +25,16 @@ public class PlayerEntity : Entity {
         base.Update();
     }
 
+    /// <summary>
+    /// When the player takes damage it subtracts the damage from it's current health
+    /// and deactivates an icon in the top left corner.
+    /// </summary>
+    /// <param name="amount"></param>
     public override void TakeDamage(int amount) {
         base.TakeDamage(amount);
-        for (int i = lifeIcons.Length - 1; i >= 0; i--) {
-            if (lifeIcons[i].activeInHierarchy) {
-                lifeIcons[i].SetActive(false);
+        for (int i = _lifeIcons.Length - 1; i >= 0; i--) {
+            if (_lifeIcons[i].activeInHierarchy) {
+                _lifeIcons[i].SetActive(false);
                 break;
             }
         }
@@ -39,6 +44,6 @@ public class PlayerEntity : Entity {
         base.Death();
         //TODO: add player death animation
         Time.timeScale = 0;
-        gameOverScreen.SetActive(true);
+        _gameOverScreen.SetActive(true);
     }
 }

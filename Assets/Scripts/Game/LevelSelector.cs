@@ -6,15 +6,19 @@ using UnityEngine.UI;
 public class LevelSelector : MonoBehaviour {
 
     [SerializeField]
-    private Button[] levelButtons;
-    private int levelreached;
+    private Button[] _levelButtons;
+    private int _levelreached;
 
+    /// <summary>
+    /// Initializes the level reached in the playerprefs and
+    /// locks the buttons in the LevelSelect scene if the player hasn't reached that level yet.
+    /// </summary>
     private void Start() {
-        levelreached = PlayerPrefs.GetInt("levelReached", 1);
+        _levelreached = PlayerPrefs.GetInt("levelReached", 1);
 
-        for (int i = 0; i < levelButtons.Length; i++) {
-            if (i + 1 > levelreached) {
-                levelButtons[i].interactable = false;
+        for (int i = 0; i < _levelButtons.Length; i++) {
+            if (i + 1 > _levelreached) {
+                _levelButtons[i].interactable = false;
             }
         }
     }

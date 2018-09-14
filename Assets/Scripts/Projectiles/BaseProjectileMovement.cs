@@ -13,6 +13,9 @@ public class BaseProjectileMovement : MonoBehaviour {
         Movement();
     }
 
+    /// <summary>
+    /// Moves the projectile up or down depending on if the projectile is hostile or not. 
+    /// </summary>
     public virtual void Movement() {
         if (!_isHostile) {
             transform.Translate(new Vector3(0, _speed * Time.deltaTime, 0));

@@ -14,11 +14,11 @@ public class BaseEnemyMovement : MonoBehaviour {
     private float _horizontalTransitionTime = 0.75f;
     [Tooltip("The height at which the enemy switches lane")]
     [SerializeField]
-    private float switchLaneHeight;
+    private float _switchLaneHeight;
     [SerializeField]
-    private int targetLane;
+    private int _targetLane;
     [SerializeField]
-    private bool switchesLane = false;
+    private bool _switchesLane = false;
     private bool _movementFinished = true;
     private Vector3 _movementVector;
 
@@ -28,15 +28,23 @@ public class BaseEnemyMovement : MonoBehaviour {
 
     private void Update() {
         Movement();
-        if (switchesLane) {
-            StartCoroutine(SwitchLane(targetLane, switchLaneHeight));
+        if (_switchesLane) {
+            StartCoroutine(SwitchLane(_targetLane, _switchLaneHeight));
         }
     }
-
+    /// <summary>
+    /// The enemy moves down with a constant speed declared in the _movementVector.
+    /// </summary>
     public virtual void Movement() {
         transform.position += _movementVector * Time.deltaTime;
     }
 
+    /// <summary>
+    /// The enemy can move from his currentLane to a different lane at a certain height.
+    /// </summary>
+    /// <param name="targetLane">The lane the enemy moves to.</param>
+    /// <param name="startHeight">The height the enemy changes lanes.</param>
+    /// <returns></returns>
     public virtual IEnumerator SwitchLane(int targetLane, float startHeight) {
         _movementFinished = false;
         if (_currentLane == targetLane) { yield return null; }

@@ -16,12 +16,12 @@ public class GameController : MonoBehaviour {
     private float[] _horizontalPositions;
 
     [SerializeField]
-    private GameObject victoryScreen;
+    private GameObject _victoryScreen;
 
     private void Awake() {
         Utility.gameController = this;
         InitLanes();
-        victoryScreen.SetActive(false);
+        _victoryScreen.SetActive(false);
     }
 
     /// <summary>
@@ -41,11 +41,19 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Gets the x position out of the array with x positions.
+    /// </summary>
+    /// <param name="amountOfLanes">the index of the lane used to get the x position</param>
+    /// <returns></returns>
     public float GetLaneX(int amountOfLanes) {
         amountOfLanes = Mathf.Clamp(amountOfLanes, 0, _amountOfLanes - 1);
         return _horizontalPositions[amountOfLanes];
     }
 
+    /// <summary>
+    /// Restarts current Level by reloading it.
+    /// </summary>
     public void RestartLevel() {
         Time.timeScale = 1;
         Utility.sceneLoader.LoadScene(2);
@@ -62,13 +70,16 @@ public class GameController : MonoBehaviour {
         Utility.sceneLoader.LoadScene(1);
     }
 
+    /// <summary>
+    /// Unlocks the next level and shows the victoryScreen
+    /// </summary>
     public void LevelCompleted() {
         Time.timeScale = 0;
-        //Add code to unlock next Level
+        //Code to unlock next Level
         if (PlayerPrefs.GetInt("levelReached") <= Utility.currentLevel) {
             PlayerPrefs.SetInt("levelReached", Utility.currentLevel + 1);
         }
         //Show Victory screen with buttons to go back to the main menu or play again
-        victoryScreen.SetActive(true);
+        _victoryScreen.SetActive(true);
     }
 }

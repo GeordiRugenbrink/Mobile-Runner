@@ -1364,7 +1364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amountOfLanes: 3
-  victoryScreen: {fileID: 2006321949}
+  _victoryScreen: {fileID: 2006321949}
 --- !u!4 &1202802713
 Transform:
   m_ObjectHideFlags: 0
@@ -1525,6 +1525,26 @@ Prefab:
     - target: {fileID: 114555032883344240, guid: 14c31413f53eeaf48925de2f8372bd8d,
         type: 2}
       propertyPath: lifeIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 1261973659}
+    - target: {fileID: 114555032883344240, guid: 14c31413f53eeaf48925de2f8372bd8d,
+        type: 2}
+      propertyPath: _gameOverScreen
+      value: 
+      objectReference: {fileID: 398918132}
+    - target: {fileID: 114555032883344240, guid: 14c31413f53eeaf48925de2f8372bd8d,
+        type: 2}
+      propertyPath: _lifeIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 229269903}
+    - target: {fileID: 114555032883344240, guid: 14c31413f53eeaf48925de2f8372bd8d,
+        type: 2}
+      propertyPath: _lifeIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 948594171}
+    - target: {fileID: 114555032883344240, guid: 14c31413f53eeaf48925de2f8372bd8d,
+        type: 2}
+      propertyPath: _lifeIcons.Array.data[2]
       value: 
       objectReference: {fileID: 1261973659}
     m_RemovedComponents: []

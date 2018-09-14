@@ -8,6 +8,10 @@ public class EnemyShooting : MonoBehaviour {
     private GameObject _projectilePrefab;
     public ObjectPooling _projectilePool;
 
+    /// <summary>
+    /// Gets a projectile out of a pool of projectiles and adds the spawnposition to it
+    /// and then activates the projectile in the scene.
+    /// </summary>
     public void Shoot() {
         GameObject obj = _projectilePool.GetPooledObject();
         Vector3 spawnPosition = transform.position + new Vector3(0, GetComponent<SpriteRenderer>().size.y / 2, 0);

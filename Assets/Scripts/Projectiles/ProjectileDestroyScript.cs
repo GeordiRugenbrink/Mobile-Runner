@@ -11,6 +11,10 @@ public class ProjectileDestroyScript : MonoBehaviour {
         StartCoroutine(DestroyProjectiles());
     }
 
+    /// <summary>
+    /// After a certain delay it deactivates the projectile so it can be added to the pool again.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DestroyProjectiles() {
         yield return new WaitForSeconds(_timeBeforeDestruction);
         this.gameObject.SetActive(false);

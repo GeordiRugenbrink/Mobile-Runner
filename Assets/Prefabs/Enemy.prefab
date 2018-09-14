@@ -87,10 +87,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 2
   _currentHealth: 0
-  despawnHeight: -6
+  _despawnHeight: -6
   isShootable: 1
   canShoot: 1
-  playerDamageOnCollision: 1
+  _playerDamageOnCollision: 1
 --- !u!114 &114231385195673238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,9 +118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1.5
   _horizontalTransitionTime: 0.75
-  switchLaneHeight: 0
-  targetLane: 0
-  switchesLane: 0
+  _switchLaneHeight: 0
+  _targetLane: 0
+  _switchesLane: 0
 --- !u!212 &212835819252512192
 SpriteRenderer:
   m_ObjectHideFlags: 1

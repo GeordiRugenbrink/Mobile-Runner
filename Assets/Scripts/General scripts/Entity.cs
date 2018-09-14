@@ -18,7 +18,10 @@ public class Entity : MonoBehaviour {
             Death();
         }
     }
-
+    /// <summary>
+    /// Subtracts the damage that needs to be done (amount) from the Entity it's current health.
+    /// </summary>
+    /// <param name="amount"></param>
     public virtual void TakeDamage(int amount) {
         _currentHealth -= amount;
     }
